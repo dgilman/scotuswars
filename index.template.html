@@ -70,10 +70,11 @@ Object.keys(stateNames).forEach(stateId => {
         event.target.style.fill = "tan";
         coloredStates.push(event.target);
 
+        var stateHeader = `${stateNames[stateId]} cases:`;
+        stateHeaderDiv.innerHTML = stateHeader;
+
         if (!(stateId in stateStats)) {
-            var stateHeader = `${stateNames[stateId]}: No cases`;
-            stateHeaderDiv.innerHTML = stateHeader;
-            casesDiv.innerHTML = "";
+            casesDiv.innerHTML = `<h3>No cases for ${stateNames[stateId]}.</h3>`;
             return;
         }
 
@@ -85,9 +86,6 @@ Object.keys(stateNames).forEach(stateId => {
             otherState.style.fill = colorMap[colorOffset];
             coloredStates.push(otherState);
         });
-
-        var stateHeader = `${stateNames[stateId]} cases:`;
-        stateHeaderDiv.innerHTML = stateHeader;
 
         var caseInfo = ``;
         for (const [key, value] of Object.entries(stateStats[stateId]).sort((a, b) => {
