@@ -106,21 +106,21 @@ Object.keys(stateNames).forEach(stateId => {
             caseInfo += `<div class="col">`;
             if (value.wins.length > 0) {
                 value.wins.forEach(win => {
-                    caseInfo += `<p><a href="https://supreme.justia.com/cases/federal/us/${win.us[0]}/${win.us[1]}/">${win.name}</a></p>`;
+                    caseInfo += `<p><a href="https://courtlistener.com/c/U.S./${win.us[0]}/${win.us[1]}/">${win.name}</a></p>`;
                 });
             }
             caseInfo += `</div>`;
             caseInfo += `<div class="col">`;
             if (value.losses.length > 0) {
                 value.losses.forEach(loss => {
-                    caseInfo += `<p><a href="https://supreme.justia.com/cases/federal/us/${loss.us[0]}/${loss.us[1]}/">${loss.name}</a></p>`;
+                    caseInfo += `<p><a href="https://courtlistener.com/c/U.S./${loss.us[0]}/${loss.us[1]}/">${loss.name}</a></p>`;
                 });
             }
             caseInfo += `</div>`;
             caseInfo += `<div class="col">`;
             if (value.undecided.length > 0) {
                 value.undecided.forEach(undecideable => {
-                    caseInfo += `<p><a href="https://supreme.justia.com/cases/federal/us/${undecideable.us[0]}/${undecideable.us[1]}/">${undecideable.name}</a></p>`;
+                    caseInfo += `<p><a href="https://courtlistener.com/c/U.S./${undecideable.us[0]}/${undecideable.us[1]}/">${undecideable.name}</a></p>`;
                 });
             }
             caseInfo += `</div>`;
