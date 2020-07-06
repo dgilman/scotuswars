@@ -3,6 +3,15 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-92715-5"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-92715-5');
+    </script>
+
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <title>State vs State Supreme Court Cases</title>
@@ -30,7 +39,8 @@
         </div>
         {{ svg|safe }}
         <div id="cases" class="text-center"></div>
-        <div>US Political map from <a href="https://commons.wikimedia.org/wiki/File:United_States_Political_Control_map.svg">Wikipedia</a> with modifications, released under Creative Commons Attribution-Share Alike 4.0 International license. Supreme Court cases from the <a href="http://scdb.wustl.edu/index.php">Washington University School of Law's Supreme Court Database</a>, released under the Creative Commons Attribution-NonCommercial 3.0 United States license.</div>
+        <p>US Political map from <a href="https://commons.wikimedia.org/wiki/File:United_States_Political_Control_map.svg">Wikipedia</a> with modifications, released under Creative Commons Attribution-Share Alike 4.0 International license. Supreme Court cases from the <a href="http://scdb.wustl.edu/index.php">Washington University School of Law's Supreme Court Database</a>, released under the Creative Commons Attribution-NonCommercial 3.0 United States license.</p>
+        <p>&copy; David Gilman 2020. | <a href="mailto:davidgilman1@gmail.com">Contact me</a> | <a href="https://github.com/dgilman/scotuswars">Fork me on Github</a> | <a href="https://pro-football-history.com">Pro Football History.com</a></p>
 </div>
     <script>
 var stateNames = {{state_names|safe}};
