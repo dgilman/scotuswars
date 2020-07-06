@@ -25,6 +25,10 @@
     stroke: black;
     stroke-width: 2px;
 }
+.infobox {
+    width: 100%;
+    padding-bottom: 62%; /* aspect ratio of svg */
+}
 </style>
     </head>
 <body>
@@ -39,7 +43,7 @@
         </div>
         <h2 id="state-header" class="text-center">Click on a state</h2>
         {{ svg|safe }}
-        <div id="cases" class="text-center"></div>
+        <div id="cases" class="text-center infobox"></div>
         <p>US Political map from <a href="https://commons.wikimedia.org/wiki/File:United_States_Political_Control_map.svg">Wikipedia</a> with modifications, released under Creative Commons Attribution-Share Alike 4.0 International license. Supreme Court cases from the <a href="http://scdb.wustl.edu/index.php">Washington University School of Law's Supreme Court Database</a>, released under the Creative Commons Attribution-NonCommercial 3.0 United States license.</p>
         <p>&copy; David Gilman 2020. | <a href="mailto:davidgilman1@gmail.com">Contact me</a> | <a href="https://github.com/dgilman/scotuswars">Fork me on Github</a> | <a href="https://pro-football-history.com">Pro Football History.com</a></p>
 </div>
@@ -48,6 +52,10 @@ var stateNames = {{state_names|safe}};
 var colorMap = {{web_colors_js|safe}};
 var stateStats = {{ state_stats_json|safe }};
 var coloredStates = [];
+
+// TODO:
+// tabs
+// accessibility
 
 Object.keys(stateNames).forEach(stateId => {
     var stateElem = document.getElementById(stateId);
@@ -88,7 +96,7 @@ Object.keys(stateNames).forEach(stateId => {
         for (const [key, value] of Object.entries(stateStats[stateId]).sort((a, b) => {
             return a[1].ci_order - b[1].ci_order;
         })) {
-            caseInfo += `<h3>${stateNames[key]}</h3>`;
+            caseInfo += `<h3>vs ${stateNames[key]}</h3>`;
             caseInfo += `<div class="row">`;
             caseInfo += `<div class="col">${stateId} Wins</div><div class="col">${stateId} Losses</div><div class="col">Indeterminate</div>`;
             caseInfo += `</div>`;
