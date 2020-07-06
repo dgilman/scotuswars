@@ -54,17 +54,20 @@ Object.keys(stateNames).forEach(stateId => {
         return;
     }
     stateElem.addEventListener("click", function (event) {
+        var casesDiv = document.getElementById("cases");
         coloredStates.forEach(coloredState => {
             coloredState.style.fill = "gainsboro";
         })
         coloredStates = [];
 
-        if (!(stateId in stateStats)) {
-            return;
-        }
-
         event.target.style.fill = "tan";
         coloredStates.push(event.target);
+
+        if (!(stateId in stateStats)) {
+            var caseInfo = `<h2>${stateNames[stateId]}: No cases</h2>`;
+            casesDiv.innerHTML = caseInfo;
+            return;
+        }
 
         var ourStats = stateStats[stateId];
 
@@ -75,7 +78,6 @@ Object.keys(stateNames).forEach(stateId => {
             coloredStates.push(otherState);
         });
 
-        var casesDiv = document.getElementById("cases");
         var caseInfo = `<h2>${stateNames[stateId]} cases:</h2>`;
         caseInfo += `<div class="container">`;
         for (const [key, value] of Object.entries(stateStats[stateId]).sort((a, b) => {

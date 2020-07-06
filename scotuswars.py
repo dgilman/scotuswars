@@ -83,6 +83,7 @@ REVERSE_STATES = {v: k for k, v in STATES.items()}
 STATE_ABBRV = {
     "Alabama": "AL",
     "Alaska": "AK",
+    "American Samoa": "AS",
     "Arizona": "AZ",
     "Arkansas": "AR",
     "California": "CA",
@@ -92,6 +93,7 @@ STATE_ABBRV = {
     "District of Columbia": "DC",
     "Florida": "FL",
     "Georgia": "GA",
+    "Guam": "GU",
     "Hawaii": "HI",
     "Idaho": "ID",
     "Illinois": "IL",
@@ -101,6 +103,7 @@ STATE_ABBRV = {
     "Kentucky": "KY",
     "Louisiana": "LA",
     "Maine": "ME",
+    "Marshall Islands": "MP",
     "Maryland": "MD",
     "Massachusetts": "MA",
     "Michigan": "MI",
