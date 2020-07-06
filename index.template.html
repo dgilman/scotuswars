@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <title>State vs State Supreme Court Cases</title>
+<style type="text/css">
+.states-svg {
+    max-height: 50vh;
+}
+.state-svg {
+    fill: gainsboro;
+    fill-rule: nonzero;
+    stroke: black;
+    stroke-width: 2px;
+}
+</style>
+    </head>
+<body>
+    <div id="mapsvg" class="container">
+        <h1 class="text-center">State vs State Supreme Court Cases</h1>
+        <p class="text-center"><strong>Click on a state</strong> to see the win rate each state has against other states in Supreme Court cases!</p>
+        <div class="mx-auto" style="width: 50%; height: 10px; border-style: solid; border-width: 1px; background: linear-gradient(90deg, rgb(255,0,0), white, rgb(0,255,0))"></div>
+        <div class="mx-auto" style="width: 50%; display: flex; justify-content: space-between">
+            <div class="text-left">Never won</div>
+            <div class="text-center">Draw</div>
+            <div class="text-right">Always won</div>
+        </div>
+        {{ svg|safe }}
+        <div id="cases" class="text-center"></div>
+        <div>US Political map from <a href="https://commons.wikimedia.org/wiki/File:United_States_Political_Control_map.svg">Wikipedia</a> with modifications, released under Creative Commons Attribution-Share Alike 4.0 International license. Supreme Court cases from the <a href="http://scdb.wustl.edu/index.php">Washington University School of Law's Supreme Court Database</a>, released under the Creative Commons Attribution-NonCommercial 3.0 United States license.</div>
+</div>
+    <script>
+var stateNames = {{state_names|safe}};
+var colorMap = {{web_colors_js|safe}};
+var stateStats = {{ state_stats_json|safe }};
+var coloredStates = [];
+
+Object.keys(stateNames).forEach(stateId => {
+    var stateElem = document.getElementById(stateId);
+    if (stateElem === null) {
+        return;
+    }
+    stateElem.addEventListener("click", function (event) {
+        coloredStates.forEach(coloredState => {
+            coloredState.style.fill = "gainsboro";
+        })
+        coloredStates = [];
+
+        if (!(stateId in stateStats)) {
+            return;
+        }
+
+        event.target.style.fill = "tan";
+        coloredStates.push(event.target);
+
+        var ourStats = stateStats[stateId];
+
+        Object.keys(ourStats).forEach(otherStateId => {
+            var otherState = document.getElementById(otherStateId);
+            var colorOffset = stateStats[stateId][otherStateId]["win_offset"];
+            otherState.style.fill = colorMap[colorOffset];
+            coloredStates.push(otherState);
+        });
+
+        var casesDiv = document.getElementById("cases");
+        var caseInfo = `<h2>${stateNames[stateId]} cases:</h2>`;
+        caseInfo += `<div class="container">`;
+        for (const [key, value] of Object.entries(stateStats[stateId]).sort((a, b) => {
+            return a[1].ci_order - b[1].ci_order;
+        })) {
+            caseInfo += `<h3>${stateNames[key]}</h3>`;
+            caseInfo += `<div class="row">`;
+            caseInfo += `<div class="col">${stateId} Wins</div><div class="col">${stateId} Losses</div><div class="col">Indeterminate</div>`;
+            caseInfo += `</div>`;
+            caseInfo += `<div class="row">`;
+            caseInfo += `<div class="col">`;
+            if (value.wins.length > 0) {
+                value.wins.forEach(win => {
+                    caseInfo += `<p><a href="https://supreme.justia.com/cases/federal/us/${win.us[0]}/${win.us[1]}/">${win.name}</a></p>`;
+                });
+            }
+            caseInfo += `</div>`;
+            caseInfo += `<div class="col">`;
+            if (value.losses.length > 0) {
+                value.losses.forEach(loss => {
+                    caseInfo += `<p><a href="https://supreme.justia.com/cases/federal/us/${loss.us[0]}/${loss.us[1]}/">${loss.name}</a></p>`;
+                });
+            }
+            caseInfo += `</div>`;
+            caseInfo += `<div class="col">`;
+            if (value.undecided.length > 0) {
+                value.undecided.forEach(undecideable => {
+                    caseInfo += `<p><a href="https://supreme.justia.com/cases/federal/us/${undecideable.us[0]}/${undecideable.us[1]}/">${undecideable.name}</a></p>`;
+                });
+            }
+            caseInfo += `</div>`;
+            caseInfo += `</div>`;
+        }
+        casesDiv.innerHTML = caseInfo;
+    });
+});
+</script>
+    </body>
+</html>
