@@ -54,10 +54,6 @@ var colorMap = {{web_colors_js|safe}};
 var stateStats = {{ state_stats_json|safe }};
 var coloredStates = [];
 
-// TODO:
-// tabs
-// accessibility
-
 Object.keys(stateNames).forEach(stateId => {
     var stateElem = document.getElementById(stateId);
     if (stateElem === null) {
