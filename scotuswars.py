@@ -270,6 +270,9 @@ def main():
         state1_code = STATE_ABBRV[state1]
         state2_code = STATE_ABBRV[state2]
 
+        if state1_code == "DC" or state2_code == "DC":
+            continue
+
         for state in (state1_code, state2_code):
             if state not in json_results:
                 json_results[state] = {}
