@@ -156,6 +156,7 @@ MULTIPLE_STATE_CASES = {
     "1904-003-01": (["Nebraska"], ["Missouri"]),  # This one is Nebraska winning
     "1939-130-01": (["Wisconsin", "Minnesota", "Ohio", "Pennsylvania"], ["Illinois"]),
     "1940-042-01": (["Wisconsin", "Minnesota", "Ohio", "Pennsylvania"], ["Illinois"]),
+    "2009-060-01": (["Alabama", "Florida", "Tennessee", "Virginia"], ["North Carolina"]),
 }
 
 
