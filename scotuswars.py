@@ -4,8 +4,8 @@ import datetime
 import sys
 
 FILENAMES = [
-    "SCDB_2019_01_caseCentered_Citation.csv",
-    "SCDB_Legacy_05_caseCentered_Citation.csv",
+    "SCDB_2020_01_caseCentered_Citation.csv",
+    "SCDB_Legacy_06_caseCentered_Citation.csv",
 ]
 
 INTERESTING_PARTIES = {
