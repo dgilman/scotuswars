@@ -157,6 +157,24 @@ MULTIPLE_STATE_CASES = {
     "1939-130-01": (["Wisconsin", "Minnesota", "Ohio", "Pennsylvania"], ["Illinois"]),
     "1940-042-01": (["Wisconsin", "Minnesota", "Ohio", "Pennsylvania"], ["Illinois"]),
     "2009-060-01": (["Alabama", "Florida", "Tennessee", "Virginia"], ["North Carolina"]),
+
+    "1974-062-01": (["United States"], ["Maine", "New Hampshire", "Massachusetts", "Rhode Island", "New York", "New Jersey",
+                                        "Delaware", "Maryland", "Virginia", "North Carolina", "South Carolina", "Georgia",
+                                        "Florida"]),
+    "1975-001-01": (["United States"], ["Maine", "New Hampshire", "Massachusetts", "Rhode Island", "New York", "New Jersey",
+                                        "Delaware", "Maryland", "Virginia", "North Carolina", "South Carolina", "Georgia",
+                                        "Florida"]),
+    "1984-089-01": (["United States"], ["Maine", "New Hampshire", "Massachusetts", "Rhode Island", "New York", "New Jersey",
+                                        "Delaware", "Maryland", "Virginia", "North Carolina", "South Carolina", "Georgia",
+                                        "Florida"]),
+    "1984-028-01": (["United States"], ["Maine", "New Hampshire", "Massachusetts", "Rhode Island", "New York", "New Jersey",
+                                        "Delaware", "Maryland", "Virginia", "North Carolina", "South Carolina", "Georgia",
+                                        "Florida"]),
+
+    "1984-034-01": (["United States"], ["Mississippi", "Alabama"]),
+    "1987-039-01": (["United States"], ["Mississippi", "Alabama"]),
+    "1990-003-01": (["United States"], ["Mississippi", "Alabama"]),
+    "1992-028-01": (["United States"], ["Mississippi", "Alabama"]),
 }
 
 
