@@ -6,16 +6,19 @@ from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 import scotuswars
 
-state_names = json.dumps({v: k for k, v in scotuswars.STATE_ABBRV.items()})
+state_names_obj = {v: k for k, v in scotuswars.STATE_ABBRV.items()}
+state_names = json.dumps(state_names_obj)
 
 env = Environment(loader=FileSystemLoader("."), autoescape=select_autoescape(["html"]),)
 
 template = env.get_template("index.template.html")
+table_template = env.get_template("table.template.html")
 
 with open("United_States_Political_Control_map.svg") as fd:
     svg = fd.read()
 
-state_stats_json = json.dumps(scotuswars.main())
+scotuswars_dict = scotuswars.main()
+state_stats_json = json.dumps(scotuswars_dict)
 
 # colormap:
 # go from HSV 0 1 1 (red) -> 0 0 1 (white) -> 1/3 0 1 (white) -> 1/3 1 1 (green)
@@ -40,6 +43,11 @@ web_colors_js = json.dumps([f'rgb({red},{green},{blue})' for red, green, blue in
 with open("index.html", "w") as out_fd:
     out_fd.write(
         template.render(state_stats_json=state_stats_json, svg=svg, web_colors_js=web_colors_js, state_names=state_names)
+    )
+
+with open("table.html", "w") as out_fd:
+    out_fd.write(
+        table_template.render(scotuswars=scotuswars_dict, state_names=state_names_obj)
     )
 
 subprocess.run(["gzip", "-kf", "-9", "index.html"])
