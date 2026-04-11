@@ -54,3 +54,4 @@ with open("table.html", "w") as out_fd:
     )
 
 subprocess.run(["gzip", "-kf", "-9", "index.html"])
+subprocess.run(["gzip", "-kf", "-9", "table.html"])
