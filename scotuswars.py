@@ -175,6 +175,8 @@ MULTIPLE_STATE_CASES = {
     "1987-039-01": (["United States"], ["Mississippi", "Alabama"]),
     "1990-003-01": (["United States"], ["Mississippi", "Alabama"]),
     "1992-028-01": (["United States"], ["Mississippi", "Alabama"]),
+    "2022-002-01": (["Delaware"], ["Pennsylvania", "Wisconsin"]),
+    "2023-046-01": (["Texas"], ["New Mexico", "Colorado"]),
 }
 
 
@@ -240,43 +242,23 @@ def main():
         citation_name = f'{case_name}, {us_cite} ({decided_date.year})'
         citation = {"name": citation_name, "us": us_cite_bits}
 
-        result_keys = [
-            tuple(sorted((petitioner_name, respondent_name)))
-            for petitioner_name in petitioner_names
-            for respondent_name in respondent_names
-        ]
+        for petitioner_name in petitioner_names:
+            for respondent_name in respondent_names:
+                result_key = tuple(sorted((petitioner_name, respondent_name)))
+                if result_key not in results:
+                    results[result_key] = [[], [], []]
 
-        for result_key in result_keys:
-            if result_key not in results:
-                results[result_key] = [[], [], []]
-
-        petitioner_idxes = [
-            result_key.index(petitioner_name) if petitioner_name in result_key else None
-            for petitioner_name in petitioner_names
-            for result_key in result_keys
-        ]
-        respondent_idxes = [
-            result_key.index(respondent_name) if respondent_name in result_key else None
-            for respondent_name in respondent_names
-            for result_key in result_keys
-        ]
-
-        if winner == "0":
-            # petitioner lost
-            for result_key, respondent_idx in zip(result_keys, respondent_idxes):
-                if respondent_idx is None:
-                    continue
-                results[result_key][respondent_idx].append(citation)
-        elif winner == "1":
-            # petitioner won
-            for result_key, petitioner_idx in zip(result_keys, petitioner_idxes):
-                if petitioner_idx is None:
-                    continue
-                results[result_key][petitioner_idx].append(citation)
-        else:
-            # inconclusive
-            for result_key in result_keys:
-                results[result_key][2].append(citation)
+                if winner == "0":
+                    # petitioner lost
+                    respondent_idx = result_key.index(respondent_name)
+                    results[result_key][respondent_idx].append(citation)
+                elif winner == "1":
+                    # petitioner won
+                    petitioner_idx = result_key.index(petitioner_name)
+                    results[result_key][petitioner_idx].append(citation)
+                else:
+                    # inconclusive
+                    results[result_key][2].append(citation)
 
     # from pprint import pprint
     # pprint(results)
