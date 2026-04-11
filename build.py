@@ -1,10 +1,13 @@
 import subprocess
 import colorsys
 import json
+import datetime
 
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 import scotuswars
+
+TODAY = datetime.date.today()
 
 state_names_obj = {v: k for k, v in scotuswars.STATE_ABBRV.items()}
 state_names = json.dumps(state_names_obj)
@@ -42,12 +45,12 @@ web_colors_js = json.dumps([f'rgb({red},{green},{blue})' for red, green, blue in
 
 with open("index.html", "w") as out_fd:
     out_fd.write(
-        template.render(state_stats_json=state_stats_json, svg=svg, web_colors_js=web_colors_js, state_names=state_names)
+        template.render(state_stats_json=state_stats_json, svg=svg, web_colors_js=web_colors_js, state_names=state_names, year=TODAY.year)
     )
 
 with open("table.html", "w") as out_fd:
     out_fd.write(
-        table_template.render(scotuswars=scotuswars_dict, state_names=state_names_obj)
+        table_template.render(scotuswars=scotuswars_dict, state_names=state_names_obj, year=TODAY.year)
     )
 
 subprocess.run(["gzip", "-kf", "-9", "index.html"])
